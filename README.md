@@ -86,3 +86,10 @@ I'm a freelance developer based in **Guwahati, Assam 🇮🇳** — I design and
 <div align="center">
 <img src="https://komarev.com/ghpvc/?username=Plavan-Hazarika5&color=58A6FF&style=flat-square&label=profile+views" />
 </div>
+
+### My contributions eating themselves
+
+<div align="center">
+  <img src="https://github.com/Plavan-Hazarika5/Plavan-Hazarika5/blob/output/github-contribution-grid-snake.svg#gh-light-mode-only" />
+  <img src="https://github.com/Plavan-Hazarika5/Plavan-Hazarika5/blob/output/github-contribution-grid-snake-dark.svg#gh-dark-mode-only" />
+</div>
