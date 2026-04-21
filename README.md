@@ -77,7 +77,7 @@ I'm a freelance developer based in **Guwahati, Assam 🇮🇳** — I design and
 <div align="center">
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/plavan-hazarika5)
-[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:plavanhazarika5@email.com)
+[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:plavanhazarika5@gmail.com)
 
 </div>
 
