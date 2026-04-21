@@ -1,9 +1,6 @@
 <div align="center">
-
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=1200&color=58A6FF&center=true&vCenter=true&width=550&lines=Hi%2C+I'm+Plavan+%F0%9F%91%8B;Freelance+Developer+from+Assam%2C+India;I+build+for+the+web;Always+learning%2C+always+shipping)](https://git.io/typing-svg)
-
+  <img src="banner.svg" alt="Plavan Hazarika" width="100%"/>
 </div>
-
 ---
 
 ### About me
