@@ -79,14 +79,14 @@ export default function TechStack() {
     <section
       ref={sectionRef}
       id="stack"
-      className="relative overflow-hidden transition-colors duration-100"
-      style={{ height: '100vh', backgroundColor: BG_COLORS[0] }}
+      className="relative overflow-hidden md:overflow-hidden transition-colors duration-100"
+      style={{ minHeight: '100vh', backgroundColor: BG_COLORS[0] }}
     >
       {/* Grid overlay */}
       <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-20 pointer-events-none" />
 
       {/* Pinned inner */}
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+      <div className="relative md:sticky md:top-0 min-h-screen md:h-screen flex flex-col justify-center overflow-hidden">
 
         {/* Section label */}
         <div className="px-8 md:px-16 mb-10 flex items-end justify-between flex-shrink-0">
@@ -102,18 +102,20 @@ export default function TechStack() {
         </div>
 
         {/* Horizontal scroll track */}
-        <div
-          ref={trackRef}
-          className="flex gap-4 px-8 md:px-16 will-change-transform"
-          style={{ width: 'max-content' }}
-        >
-          {TECHS.map((tech) => (
-            <TechCard key={tech.name} tech={tech} />
-          ))}
+        <div className="overflow-x-auto md:overflow-visible px-6 md:px-0 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-pan-x">
+          <div
+            ref={trackRef}
+            className="flex gap-4 md:px-16 will-change-transform"
+            style={{ width: 'max-content' }}
+          >
+            {TECHS.map((tech) => (
+              <TechCard key={tech.name} tech={tech} />
+            ))}
 
-          {/* End spacer card */}
-          <div className="flex-shrink-0 w-24 flex items-center justify-center opacity-20">
-            <div className="w-px h-24 bg-gradient-to-b from-white/40 to-transparent" />
+            {/* End spacer card */}
+            <div className="flex-shrink-0 w-24 flex items-center justify-center opacity-20">
+              <div className="w-px h-24 bg-gradient-to-b from-white/40 to-transparent" />
+            </div>
           </div>
         </div>
       </div>
