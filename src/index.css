@@ -1,0 +1,104 @@
+/* src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base resets ─────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Lenis takes over smooth scroll; disable native */
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+  background-color: #040407;
+  color: white;
+  overflow-x: hidden;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ─── Custom scrollbar ────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #040407;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 229, 255, 0.3);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 229, 255, 0.6);
+}
+
+/* ─── Glassmorphism utility classes ───────────────────── */
+@layer components {
+  .glass-card {
+    @apply rounded-2xl border border-glass-border bg-glass backdrop-blur-glass shadow-glass;
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300 hover:shadow-glass-hover hover:border-white/20;
+  }
+
+  .btn-primary {
+    @apply px-8 py-4 rounded-full font-mono text-sm uppercase tracking-widest font-bold
+           bg-accent-cyan text-void transition-all duration-300
+           hover:shadow-glow-cyan;
+  }
+
+  .btn-ghost {
+    @apply px-8 py-4 rounded-full font-mono text-sm uppercase tracking-widest
+           border border-glass-border bg-glass backdrop-blur-glass text-white
+           transition-all duration-300 hover:border-white/30 hover:bg-white/10;
+  }
+}
+
+/* ─── Scan line ambient effect (decorative) ───────────── */
+@layer utilities {
+  .scanline::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 229, 255, 0.15) 50%, transparent 100%);
+    animation: scan 6s linear infinite;
+    pointer-events: none;
+    z-index: 9997;
+  }
+
+  .text-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255,255,255,0.6) 0%,
+      rgba(255,255,255,1) 40%,
+      rgba(0,229,255,0.9) 50%,
+      rgba(255,255,255,1) 60%,
+      rgba(255,255,255,0.6) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+  }
+}
+
+/* ─── GSAP will-change hints ──────────────────────────── */
+.gsap-animate {
+  will-change: transform, opacity;
+}
+
+/* ─── Framer Motion fixes ─────────────────────────────── */
+[data-framer-component-type] {
+  position: relative;
+}
