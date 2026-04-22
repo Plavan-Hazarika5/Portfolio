@@ -1,0 +1,66 @@
+<svg width="100%" viewBox="0 0 680 200" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>GitHub profile banner for Plavan Hazarika</title>
+<desc>Animated dark banner with floating particles and typing effect</desc>
+<defs>
+  <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+    <stop offset="0%" stop-color="#0f0c1a"/>
+    <stop offset="100%" stop-color="#060410"/>
+  </radialGradient>
+  <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#7F77DD" stop-opacity="0.3"/>
+    <stop offset="100%" stop-color="#7F77DD" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow2" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#1D9E75" stop-opacity="0.25"/>
+    <stop offset="100%" stop-color="#1D9E75" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<rect width="680" height="200" fill="url(#bg)"/>
+<ellipse cx="520" cy="60" rx="120" ry="80" fill="url(#glow1)">
+  <animate attributeName="cx" values="520;560;520" dur="6s" repeatCount="indefinite"/>
+  <animate attributeName="cy" values="60;80;60" dur="6s" repeatCount="indefinite"/>
+</ellipse>
+<ellipse cx="160" cy="150" rx="100" ry="70" fill="url(#glow2)">
+  <animate attributeName="cx" values="160;120;160" dur="7s" repeatCount="indefinite"/>
+  <animate attributeName="cy" values="150;130;150" dur="7s" repeatCount="indefinite"/>
+</ellipse>
+<circle cx="60" cy="30" r="1.5" fill="#7F77DD" opacity="0.6"><animate attributeName="opacity" values="0.6;0.1;0.6" dur="3s" repeatCount="indefinite"/><animate attributeName="cy" values="30;20;30" dur="3s" repeatCount="indefinite"/></circle>
+<circle cx="200" cy="20" r="1" fill="#1D9E75" opacity="0.5"><animate attributeName="opacity" values="0.5;0.1;0.5" dur="4.5s" repeatCount="indefinite"/><animate attributeName="cy" values="20;12;20" dur="4.5s" repeatCount="indefinite"/></circle>
+<circle cx="400" cy="15" r="1.5" fill="#AFA9EC" opacity="0.4"><animate attributeName="opacity" values="0.4;0.1;0.4" dur="3.8s" repeatCount="indefinite"/><animate attributeName="cy" values="15;8;15" dur="3.8s" repeatCount="indefinite"/></circle>
+<circle cx="600" cy="25" r="1" fill="#5DCAA5" opacity="0.5"><animate attributeName="opacity" values="0.5;0.15;0.5" dur="5s" repeatCount="indefinite"/><animate attributeName="cy" values="25;15;25" dur="5s" repeatCount="indefinite"/></circle>
+<circle cx="640" cy="170" r="1.5" fill="#7F77DD" opacity="0.4"><animate attributeName="opacity" values="0.4;0.1;0.4" dur="4s" repeatCount="indefinite"/></circle>
+<circle cx="300" cy="185" r="1" fill="#1D9E75" opacity="0.5"><animate attributeName="opacity" values="0.5;0.1;0.5" dur="6s" repeatCount="indefinite"/></circle>
+<circle cx="500" cy="180" r="1.2" fill="#AFA9EC" opacity="0.35"><animate attributeName="opacity" values="0.35;0.1;0.35" dur="3.2s" repeatCount="indefinite"/></circle>
+<circle cx="80" cy="160" r="1" fill="#5DCAA5" opacity="0.4"><animate attributeName="opacity" values="0.4;0.1;0.4" dur="5.5s" repeatCount="indefinite"/></circle>
+<line x1="40" y1="1" x2="640" y2="1" stroke="#7F77DD" stroke-width="1" opacity="0.5"/>
+<line x1="40" y1="199" x2="640" y2="199" stroke="#1D9E75" stroke-width="1" opacity="0.5"/>
+<text font-family="'Courier New', monospace" font-size="11" fill="#534AB7" opacity="0">
+  <tspan x="48" y="60">&lt;/&gt;</tspan>
+  <animate attributeName="opacity" values="0;0.8;0.8" dur="0.5s" begin="0.2s" fill="freeze"/>
+</text>
+<text font-family="'Courier New', monospace" font-size="42" font-weight="700" letter-spacing="-1">
+  <tspan x="48" y="108" fill="#ffffff" opacity="0">Plavan<animate attributeName="opacity" values="0;1;1" dur="0.4s" begin="0.4s" fill="freeze"/></tspan>
+  <tspan fill="#7F77DD" opacity="0"> Hazarika<animate attributeName="opacity" values="0;1;1" dur="0.4s" begin="0.9s" fill="freeze"/></tspan>
+</text>
+<rect x="48" y="114" width="0" height="2" fill="#1D9E75" rx="1">
+  <animate attributeName="width" values="0;260" dur="0.6s" begin="1.3s" fill="freeze"/>
+</rect>
+<g opacity="0">
+  <animate attributeName="opacity" values="0;1;1" dur="0.3s" begin="1.6s" fill="freeze"/>
+  <text x="48" y="142" font-family="'Courier New', monospace" font-size="13" fill="#AFA9EC" letter-spacing="2">DESIGNER  &amp;  DEVELOPER</text>
+</g>
+<g opacity="0">
+  <animate attributeName="opacity" values="0;1;1" dur="0.3s" begin="2s" fill="freeze"/>
+  <rect x="48" y="156" width="90" height="24" rx="12" fill="none" stroke="#7F77DD" stroke-width="0.8" opacity="0.6"/>
+  <text x="93" y="172" font-family="'Courier New', monospace" font-size="11" fill="#AFA9EC" text-anchor="middle">UI / UX</text>
+  <rect x="148" y="156" width="108" height="24" rx="12" fill="none" stroke="#1D9E75" stroke-width="0.8" opacity="0.6"/>
+  <text x="202" y="172" font-family="'Courier New', monospace" font-size="11" fill="#5DCAA5" text-anchor="middle">Web Dev</text>
+  <rect x="266" y="156" width="130" height="24" rx="12" fill="none" stroke="#7F77DD" stroke-width="0.8" opacity="0.6"/>
+  <text x="331" y="172" font-family="'Courier New', monospace" font-size="11" fill="#AFA9EC" text-anchor="middle">Mobile Apps</text>
+  <rect x="406" y="156" width="128" height="24" rx="12" fill="none" stroke="#1D9E75" stroke-width="0.8" opacity="0.6"/>
+  <text x="470" y="172" font-family="'Courier New', monospace" font-size="11" fill="#5DCAA5" text-anchor="middle">Graphic Design</text>
+</g>
+<rect x="48" y="186" width="6" height="6" rx="1" fill="#1D9E75" opacity="0">
+  <animate attributeName="opacity" values="0;0.8;0;0.8;0" dur="1.2s" begin="2.3s" repeatCount="indefinite"/>
+</rect>
+</svg>
