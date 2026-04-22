@@ -42,15 +42,16 @@ const PROJECTS = [
   },
   {
     id: 4,
-    title: 'Weather & Mood UI',
+    title: 'Atmosphere.io',
     tag: 'API · Animation · UI/UX',
-    desc: 'Beautiful weather app with mood-based UI that shifts color palette and animations based on conditions. Framer Motion transitions make every weather change feel cinematic.',
+    desc: 'Live weather experience with mood-driven visuals, geolocation, saved cities, and a 5-day forecast. Built as a standalone deployable app.',
     color: '#f43f5e',
     glow: 'rgba(244,63,94,0.25)',
     span: 'md:col-span-1',
-    year: '2025',
-    stack: ['React', 'OpenWeather API', 'Framer Motion', 'GSAP'],
-    link: '#',
+    year: '2026',
+    stack: ['React', 'Vite', 'Open-Meteo API', 'CSS Animations'],
+    link: 'https://atmosphere-io.vercel.app/',
+    repo: 'https://github.com/Plavan-Hazarika5/Atmosphere-io',
   },
   {
     id: 5,
@@ -228,19 +229,36 @@ function ProjectModal({ project, onClose }) {
               </div>
 
               {/* CTA */}
-              <a
-                href={project.link}
-                className="inline-flex items-center gap-2 font-mono text-sm uppercase tracking-widest px-6 py-3 rounded-full transition-all duration-300"
-                style={{
-                  color: project.color,
-                  border: `1px solid ${project.color}40`,
-                  background: `${project.color}10`,
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = `${project.color}25`)}
-                onMouseLeave={(e) => (e.currentTarget.style.background = `${project.color}10`)}
-              >
-                View Case Study →
-              </a>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={project.link}
+                  target={project.link.startsWith('http') ? '_blank' : undefined}
+                  rel={project.link.startsWith('http') ? 'noreferrer' : undefined}
+                  className="inline-flex items-center gap-2 font-mono text-sm uppercase tracking-widest px-6 py-3 rounded-full transition-all duration-300"
+                  style={{
+                    color: project.color,
+                    border: `1px solid ${project.color}40`,
+                    background: `${project.color}10`,
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = `${project.color}25`)}
+                  onMouseLeave={(e) => (e.currentTarget.style.background = `${project.color}10`)}
+                >
+                  {project.link.startsWith('#') || project.link.startsWith('http')
+                    ? 'View Live Demo →'
+                    : 'View Case Study →'}
+                </a>
+
+                {project.repo ? (
+                  <a
+                    href={project.repo}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 font-mono text-sm uppercase tracking-widest px-6 py-3 rounded-full transition-all duration-300 border border-glass-border bg-glass text-white/75 hover:text-white hover:border-white/40"
+                  >
+                    View Source ↗
+                  </a>
+                ) : null}
+              </div>
             </motion.div>
           </motion.div>
         </>
