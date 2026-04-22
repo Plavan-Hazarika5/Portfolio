@@ -14,8 +14,38 @@ export default function CustomCursor() {
   const labelRef = useRef(null);
   const [label, setLabel] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isDesktopPointer, setIsDesktopPointer] = useState(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+
+    const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const coarsePointerQuery = window.matchMedia('(any-pointer: coarse)');
+    const noHoverQuery = window.matchMedia('(any-hover: none)');
+
+    const updatePointerCapability = () => {
+      const hasTouchPoints = navigator.maxTouchPoints > 0;
+      const shouldEnableDesktopCursor =
+        mediaQuery.matches && !coarsePointerQuery.matches && !noHoverQuery.matches && !hasTouchPoints;
+
+      setIsDesktopPointer(shouldEnableDesktopCursor);
+    };
+
+    updatePointerCapability();
+    mediaQuery.addEventListener('change', updatePointerCapability);
+    coarsePointerQuery.addEventListener('change', updatePointerCapability);
+    noHoverQuery.addEventListener('change', updatePointerCapability);
+
+    return () => {
+      mediaQuery.removeEventListener('change', updatePointerCapability);
+      coarsePointerQuery.removeEventListener('change', updatePointerCapability);
+      noHoverQuery.removeEventListener('change', updatePointerCapability);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isDesktopPointer) return;
+
     const dot = dotRef.current;
     const ring = ringRef.current;
 
@@ -74,7 +104,9 @@ export default function CustomCursor() {
         el.removeEventListener('mouseleave', onMouseLeave);
       });
     };
-  }, []);
+  }, [isDesktopPointer]);
+
+  if (!isDesktopPointer) return null;
 
   return (
     <>
