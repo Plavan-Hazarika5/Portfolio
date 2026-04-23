@@ -79,9 +79,13 @@ export default function TechStack() {
 
   // When the mouse is over the horizontal scroller on desktop,
   // wheel events can get "captured" and force the user to scroll the
-  // carousel all the way before the page continues. This forwards
-  // vertical wheel to the page scroll unless the user is intentionally
-  // horizontal-scrolling (Shift+wheel or trackpad horizontal gesture).
+  // carousel all the way before the page continues.
+  //
+  // Behavior:
+  // - Normal wheel scrolls the carousel horizontally *while it can*.
+  // - Once the carousel hits its start/end, the wheel scroll falls through
+  //   and continues the page scroll (no "stuck" feeling).
+  // - Shift+wheel or trackpad horizontal gestures behave naturally.
   useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
@@ -91,9 +95,19 @@ export default function TechStack() {
       if (e.shiftKey) return;
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
 
-      // Forward vertical scrolling to the page.
-      e.preventDefault();
-      window.scrollBy({ top: e.deltaY, left: 0, behavior: 'auto' });
+      // Convert vertical wheel into horizontal scroll for the carousel.
+      const prevLeft = el.scrollLeft;
+      const nextLeft = prevLeft + e.deltaY;
+      const maxLeft = el.scrollWidth - el.clientWidth;
+
+      // If we can scroll the carousel further in the wheel direction, consume it.
+      const canScroll =
+        (e.deltaY > 0 && prevLeft < maxLeft) || (e.deltaY < 0 && prevLeft > 0);
+
+      if (canScroll) {
+        e.preventDefault();
+        el.scrollLeft = Math.max(0, Math.min(maxLeft, nextLeft));
+      }
     };
 
     el.addEventListener('wheel', onWheel, { passive: false });
