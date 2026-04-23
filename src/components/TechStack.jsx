@@ -10,13 +10,53 @@ const TECHS = [
   { name: 'HTML', icon: '⬡', level: 85, color: '#e34f26' },
   { name: 'CSS', icon: '✦', level: 80, color: '#264de4' },
   { name: 'Tailwind', icon: '✦', level: 75, color: '#06b6d4' },
-  { name: 'JavaScript', icon: '⚡', level: 75, color: '#f7df1e' },
-  { name: 'React', icon: '⚛', level: 70, color: '#61dafb' },
+  {
+    name: 'JavaScript',
+    icon: '⚡',
+    level: 82,
+    color: '#f7df1e',
+    description: 'Drives interactive UI logic and reusable app flows across my projects.',
+  },
+  {
+    name: 'React',
+    icon: '⚛',
+    level: 84,
+    color: '#61dafb',
+    description: 'I build component-first interfaces with scalable structure and clean state.',
+  },
+  { name: 'Vite', icon: '⚡', level: 70, color: '#a855f7' },
   { name: 'GSAP', icon: '▲', level: 65, color: '#88ce02' },
-  { name: 'Node.js', icon: '⬢', level: 72, color: '#5fa04e' },
-  { name: 'Express', icon: 'Ξ', level: 70, color: '#d6d6d6' },
+  { name: 'Framer Motion', icon: '⟠', level: 65, color: '#ff2d55' },
+  { name: 'Lenis', icon: '≈', level: 60, color: '#00e5ff' },
+  {
+    name: 'Node.js',
+    icon: '⬢',
+    level: 80,
+    color: '#5fa04e',
+    description: 'Powers my backend workflows, APIs, and server-side integrations.',
+  },
+  {
+    name: 'Express',
+    icon: 'Ξ',
+    level: 78,
+    color: '#d6d6d6',
+    description: 'Used for lightweight REST APIs, routing, and backend service structure.',
+  },
+  {
+    name: 'Firebase',
+    icon: '◉',
+    level: 76,
+    color: '#ffca28',
+    description: 'Helps me ship quickly with auth, realtime data, and managed backend tools.',
+  },
   { name: 'MongoDB', icon: '◍', level: 70, color: '#47a248' },
-  { name: 'Git', icon: '⑂', level: 80, color: '#f1502f' },
+  {
+    name: 'Git',
+    icon: '⑂',
+    level: 81,
+    color: '#f1502f',
+    description: 'Essential for version control, clean history, and collaborative delivery.',
+  },
   { name: 'GitHub', icon: '⌘', level: 80, color: '#ffffff' },
   { name: 'Python', icon: '🐍', level: 80, color: '#3776ab' },
   { name: 'Java', icon: '☕', level: 75, color: '#f89820' },
@@ -50,6 +90,12 @@ function TechCard({ tech }) {
 
       {/* Name */}
       <h3 className="font-heading text-xl text-white mb-3">{tech.name}</h3>
+
+      {tech.description ? (
+        <p className="font-body text-xs leading-relaxed text-white/60 mb-3 min-h-[44px]">
+          {tech.description}
+        </p>
+      ) : null}
 
       {/* Level bar */}
       <div className="mt-auto">

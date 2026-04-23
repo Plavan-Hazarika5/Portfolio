@@ -102,7 +102,7 @@ export default function HeroSection() {
           ref={subtitleRef}
           className="font-body text-[clamp(1rem,2.5vw,1.4rem)] text-white/50 max-w-2xl leading-relaxed mt-6"
         >
-          Freelance Designer & Developer specializing in Graphic Design, UI/UX, and Web & Mobile experiences. BTech CSE Student crafting digital products that look great and work beautifully.
+          I am a UI/UX-focused developer who designs polished, user-centered experiences with Figma and strong product thinking. I also build full-stack web applications with React and Node.js to turn ideas into scalable, production-ready products.
         </p>
 
         {/* CTA row */}
