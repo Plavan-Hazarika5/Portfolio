@@ -4,7 +4,6 @@ import CustomCursor from './components/CustomCursor';
 import HeroSection from './components/HeroSection';
 import BentoGrid from './components/BentoGrid';
 import TechStack from './components/TechStack';
-import WeatherMoodDemo from './components/WeatherMoodDemo';
 import { Navbar, Footer } from './components/NavbarFooter';
 
 export default function App() {
@@ -24,7 +23,6 @@ export default function App() {
       <main>
         <HeroSection />
         <BentoGrid />
-        <WeatherMoodDemo />
         <TechStack />
         <Footer />
       </main>
