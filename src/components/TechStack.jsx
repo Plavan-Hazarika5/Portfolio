@@ -222,8 +222,7 @@ export default function TechStack() {
         {/* Horizontal scroll track */}
         <div
           ref={scrollerRef}
-          data-lenis-prevent
-            className="overflow-x-auto overflow-y-hidden px-4 md:px-0 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-pan-x"
+          className="overflow-x-auto overflow-y-hidden px-4 md:px-0 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-auto md:touch-pan-x"
         >
           <div
             ref={trackRef}
