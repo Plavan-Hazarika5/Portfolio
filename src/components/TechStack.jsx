@@ -94,7 +94,7 @@ const BG_COLORS = ['#040407', '#06040f', '#020d14', '#050a04'];
 function TechCard({ tech }) {
   return (
     <div
-      className="tech-card flex-shrink-0 w-48 md:w-64 rounded-2xl border border-glass-border bg-glass backdrop-blur-glass p-6 relative overflow-hidden group"
+      className="tech-card flex-shrink-0 w-40 sm:w-44 md:w-64 rounded-2xl border border-glass-border bg-glass backdrop-blur-glass p-4 md:p-6 relative overflow-hidden group"
       style={{ height: '220px' }}
     >
       {/* Hover glow */}
@@ -114,10 +114,10 @@ function TechCard({ tech }) {
       </div>
 
       {/* Name */}
-      <h3 className="font-heading text-xl text-white mb-3">{tech.name}</h3>
+      <h3 className="font-heading text-lg md:text-xl text-white mb-3">{tech.name}</h3>
 
       {tech.description ? (
-        <p className="font-body text-xs leading-relaxed text-white/60 mb-3 min-h-[44px]">
+        <p className="font-body text-[11px] md:text-xs leading-relaxed text-white/60 mb-3 min-h-[34px] md:min-h-[44px]">
           {tech.description}
         </p>
       ) : null}
@@ -207,7 +207,7 @@ export default function TechStack() {
       <div className="relative md:sticky md:top-0 min-h-screen md:h-screen flex flex-col justify-center overflow-hidden">
 
         {/* Section label */}
-        <div className="px-8 md:px-16 mb-10 flex items-end justify-between flex-shrink-0">
+        <div className="px-6 md:px-16 mb-8 md:mb-10 flex items-end justify-between flex-shrink-0">
           <div>
             <span className="font-mono text-xs text-accent-cyan uppercase tracking-[0.3em] mb-3 block">
               Tools of Trade
@@ -223,22 +223,22 @@ export default function TechStack() {
         <div
           ref={scrollerRef}
           data-lenis-prevent
-          className="overflow-x-auto overflow-y-hidden px-6 md:px-0 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-pan-x"
+            className="overflow-x-auto overflow-y-hidden px-4 md:px-0 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-pan-x"
         >
           <div
             ref={trackRef}
-            className="flex gap-4 md:px-16 will-change-transform"
+            className="flex gap-3 md:gap-4 md:px-16 will-change-transform"
             style={{ width: 'max-content' }}
           >
             {TECH_GROUPS.map((group) => (
               <div
                 key={group.name}
-                className="flex-shrink-0 rounded-2xl border border-glass-border/70 bg-white/[0.02] p-4 md:p-6"
+                className="flex-shrink-0 w-[90vw] md:w-auto rounded-2xl border border-glass-border/70 bg-white/[0.02] p-3 md:p-6"
               >
-                <h3 className="font-mono text-[11px] text-accent-cyan uppercase tracking-[0.25em] mb-4">
+                <h3 className="font-mono text-[10px] md:text-[11px] text-accent-cyan uppercase tracking-[0.25em] mb-3 md:mb-4">
                   {group.name}
                 </h3>
-                <div className="flex gap-4">
+                <div className="flex flex-wrap md:flex-nowrap gap-3 md:gap-4">
                   {group.techs.map((tech) => (
                     <TechCard key={tech.name} tech={tech} />
                   ))}
