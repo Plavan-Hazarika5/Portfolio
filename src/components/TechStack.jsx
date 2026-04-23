@@ -2,66 +2,91 @@
 import { useEffect, useRef } from 'react';
 import { useGsapHorizontalScroll } from '../hooks/useGsapScroll';
 
-const TECHS = [
-  { name: 'UI/UX', icon: '◐', level: 80, color: '#ff6b6b' },
-  { name: 'Graphic Design', icon: '❋', level: 80, color: '#ff9f43' },
-  { name: 'Figma', icon: '◈', level: 85, color: '#f24e1e' },
-  { name: 'Framer', icon: '◈', level: 65, color: '#ff0055' },
-  { name: 'HTML', icon: '⬡', level: 85, color: '#e34f26' },
-  { name: 'CSS', icon: '✦', level: 80, color: '#264de4' },
-  { name: 'Tailwind', icon: '✦', level: 75, color: '#06b6d4' },
+const TECH_GROUPS = [
   {
-    name: 'JavaScript',
-    icon: '⚡',
-    level: 82,
-    color: '#f7df1e',
-    description: 'Drives interactive UI logic and reusable app flows across my projects.',
+    name: 'Frontend & Core',
+    techs: [
+      { name: 'HTML', icon: '⬡', level: 85, color: '#e34f26' },
+      { name: 'CSS', icon: '✦', level: 80, color: '#264de4' },
+      { name: 'Tailwind', icon: '✦', level: 75, color: '#06b6d4' },
+      {
+        name: 'JavaScript',
+        icon: '⚡',
+        level: 82,
+        color: '#f7df1e',
+        description: 'Drives interactive UI logic and reusable app flows across my projects.',
+      },
+      {
+        name: 'React',
+        icon: '⚛',
+        level: 84,
+        color: '#61dafb',
+        description: 'I build component-first interfaces with scalable structure and clean state.',
+      },
+      { name: 'Vite', icon: '⚡', level: 70, color: '#a855f7' },
+    ],
   },
   {
-    name: 'React',
-    icon: '⚛',
-    level: 84,
-    color: '#61dafb',
-    description: 'I build component-first interfaces with scalable structure and clean state.',
+    name: 'Backend',
+    techs: [
+      {
+        name: 'Node.js',
+        icon: '⬢',
+        level: 80,
+        color: '#5fa04e',
+        description: 'Powers my backend workflows, APIs, and server-side integrations.',
+      },
+      {
+        name: 'Express',
+        icon: 'Ξ',
+        level: 78,
+        color: '#d6d6d6',
+        description: 'Used for lightweight REST APIs, routing, and backend service structure.',
+      },
+      {
+        name: 'Firebase',
+        icon: '◉',
+        level: 76,
+        color: '#ffca28',
+        description: 'Helps me ship quickly with auth, realtime data, and managed backend tools.',
+      },
+      { name: 'MongoDB', icon: '◍', level: 70, color: '#47a248' },
+    ],
   },
-  { name: 'Vite', icon: '⚡', level: 70, color: '#a855f7' },
-  { name: 'GSAP', icon: '▲', level: 65, color: '#88ce02' },
-  { name: 'Framer Motion', icon: '⟠', level: 65, color: '#ff2d55' },
-  { name: 'Lenis', icon: '≈', level: 60, color: '#00e5ff' },
   {
-    name: 'Node.js',
-    icon: '⬢',
-    level: 80,
-    color: '#5fa04e',
-    description: 'Powers my backend workflows, APIs, and server-side integrations.',
+    name: 'Animation',
+    techs: [
+      { name: 'GSAP', icon: '▲', level: 65, color: '#88ce02' },
+      { name: 'Framer Motion', icon: '⟠', level: 65, color: '#ff2d55' },
+      { name: 'Lenis', icon: '≈', level: 60, color: '#00e5ff' },
+    ],
   },
   {
-    name: 'Express',
-    icon: 'Ξ',
-    level: 78,
-    color: '#d6d6d6',
-    description: 'Used for lightweight REST APIs, routing, and backend service structure.',
+    name: 'Design & Tools',
+    techs: [
+      { name: 'UI/UX', icon: '◐', level: 80, color: '#ff6b6b' },
+      { name: 'Graphic Design', icon: '❋', level: 80, color: '#ff9f43' },
+      { name: 'Figma', icon: '◈', level: 85, color: '#f24e1e' },
+      { name: 'Framer', icon: '◈', level: 65, color: '#ff0055' },
+      {
+        name: 'Git',
+        icon: '⑂',
+        level: 81,
+        color: '#f1502f',
+        description: 'Essential for version control, clean history, and collaborative delivery.',
+      },
+      { name: 'GitHub', icon: '⌘', level: 80, color: '#ffffff' },
+    ],
   },
   {
-    name: 'Firebase',
-    icon: '◉',
-    level: 76,
-    color: '#ffca28',
-    description: 'Helps me ship quickly with auth, realtime data, and managed backend tools.',
+    name: 'Languages',
+    techs: [
+      { name: 'Python', icon: '🐍', level: 80, color: '#3776ab' },
+      { name: 'Java', icon: '☕', level: 75, color: '#f89820' },
+      { name: 'C++', icon: '⚙', level: 80, color: '#00599c' },
+      { name: 'C', icon: '©', level: 80, color: '#a8b9cc' },
+    ],
   },
-  { name: 'MongoDB', icon: '◍', level: 70, color: '#47a248' },
-  {
-    name: 'Git',
-    icon: '⑂',
-    level: 81,
-    color: '#f1502f',
-    description: 'Essential for version control, clean history, and collaborative delivery.',
-  },
-  { name: 'GitHub', icon: '⌘', level: 80, color: '#ffffff' },
-  { name: 'Python', icon: '🐍', level: 80, color: '#3776ab' },
-  { name: 'Java', icon: '☕', level: 75, color: '#f89820' },
-  { name: 'C++', icon: '⚙', level: 80, color: '#00599c' },
-  { name: 'C', icon: '©', level: 80, color: '#a8b9cc' },
 ];
 
 const BG_COLORS = ['#040407', '#06040f', '#020d14', '#050a04'];
@@ -205,8 +230,20 @@ export default function TechStack() {
             className="flex gap-4 md:px-16 will-change-transform"
             style={{ width: 'max-content' }}
           >
-            {TECHS.map((tech) => (
-              <TechCard key={tech.name} tech={tech} />
+            {TECH_GROUPS.map((group) => (
+              <div
+                key={group.name}
+                className="flex-shrink-0 rounded-2xl border border-glass-border/70 bg-white/[0.02] p-4 md:p-6"
+              >
+                <h3 className="font-mono text-[11px] text-accent-cyan uppercase tracking-[0.25em] mb-4">
+                  {group.name}
+                </h3>
+                <div className="flex gap-4">
+                  {group.techs.map((tech) => (
+                    <TechCard key={tech.name} tech={tech} />
+                  ))}
+                </div>
+              </div>
             ))}
 
             {/* End spacer card */}
