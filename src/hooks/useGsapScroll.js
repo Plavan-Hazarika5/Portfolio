@@ -29,40 +29,10 @@ export function useGsapHorizontalScroll(bgColors = ['#040407', '#0d0220', '#020d
     const mm = gsap.matchMedia();
 
     mm.add('(min-width: 768px)', () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: () => `+=${Math.abs(getScrollAmount()) + window.innerWidth}`,
-          scrub: 1.5,
-          pin: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            // Interpolate background color through the array
-            const progress = self.progress;
-            const colorIndex = progress * (bgColors.length - 1);
-            const fromIdx = Math.floor(colorIndex);
-            const toIdx = Math.min(fromIdx + 1, bgColors.length - 1);
-            const t = colorIndex - fromIdx;
-
-            const from = hexToRgb(bgColors[fromIdx]);
-            const to = hexToRgb(bgColors[toIdx]);
-
-            if (from && to) {
-              const r = Math.round(from.r + (to.r - from.r) * t);
-              const g = Math.round(from.g + (to.g - from.g) * t);
-              const b = Math.round(from.b + (to.b - from.b) * t);
-              section.style.backgroundColor = `rgb(${r},${g},${b})`;
-            }
-          },
-        },
-      });
-
-      tl.to(track, {
-        x: getScrollAmount,
-        ease: 'none',
-      });
+      // IMPORTANT UX CHOICE:
+      // We intentionally avoid pinning this section on desktop because it can
+      // feel like the page is "stuck" at Tech Stack. Desktop users can still
+      // explore the cards via horizontal scroll on the track itself.
 
       // Stagger cards in slightly on first reveal
       gsap.fromTo(

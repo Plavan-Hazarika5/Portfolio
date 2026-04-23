@@ -1,4 +1,5 @@
 // src/components/TechStack.jsx
+import { useEffect, useRef } from 'react';
 import { useGsapHorizontalScroll } from '../hooks/useGsapScroll';
 
 const TECHS = [
@@ -74,6 +75,30 @@ function TechCard({ tech }) {
 
 export default function TechStack() {
   const { sectionRef, trackRef } = useGsapHorizontalScroll(BG_COLORS);
+  const scrollerRef = useRef(null);
+
+  // When the mouse is over the horizontal scroller on desktop,
+  // wheel events can get "captured" and force the user to scroll the
+  // carousel all the way before the page continues. This forwards
+  // vertical wheel to the page scroll unless the user is intentionally
+  // horizontal-scrolling (Shift+wheel or trackpad horizontal gesture).
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+
+    const onWheel = (e) => {
+      // Let horizontal gestures behave naturally.
+      if (e.shiftKey) return;
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+
+      // Forward vertical scrolling to the page.
+      e.preventDefault();
+      window.scrollBy({ top: e.deltaY, left: 0, behavior: 'auto' });
+    };
+
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, []);
 
   return (
     <section
@@ -102,7 +127,10 @@ export default function TechStack() {
         </div>
 
         {/* Horizontal scroll track */}
-        <div className="overflow-x-auto md:overflow-visible px-6 md:px-0 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-pan-x">
+        <div
+          ref={scrollerRef}
+          className="overflow-x-auto overflow-y-hidden px-6 md:px-0 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-pan-x"
+        >
           <div
             ref={trackRef}
             className="flex gap-4 md:px-16 will-change-transform"
