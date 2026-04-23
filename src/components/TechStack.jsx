@@ -91,21 +91,29 @@ export default function TechStack() {
     if (!el) return;
 
     const onWheel = (e) => {
-      // Let horizontal gestures behave naturally.
-      if (e.shiftKey) return;
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      // If the cursor is over the carousel, don't let Lenis/page scroll
+      // also react to the same wheel event.
+      const stopPageScroll = () => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+      };
 
-      // Convert vertical wheel into horizontal scroll for the carousel.
+      const isShift = e.shiftKey;
+      const useHorizontalDelta = isShift || Math.abs(e.deltaX) > Math.abs(e.deltaY);
+      const delta = useHorizontalDelta ? e.deltaX : e.deltaY;
+
+      // Convert wheel into horizontal scroll for the carousel.
       const prevLeft = el.scrollLeft;
-      const nextLeft = prevLeft + e.deltaY;
+      const nextLeft = prevLeft + delta;
       const maxLeft = el.scrollWidth - el.clientWidth;
 
       // If we can scroll the carousel further in the wheel direction, consume it.
       const canScroll =
-        (e.deltaY > 0 && prevLeft < maxLeft) || (e.deltaY < 0 && prevLeft > 0);
+        (delta > 0 && prevLeft < maxLeft) || (delta < 0 && prevLeft > 0);
 
       if (canScroll) {
-        e.preventDefault();
+        stopPageScroll();
         el.scrollLeft = Math.max(0, Math.min(maxLeft, nextLeft));
       }
     };
