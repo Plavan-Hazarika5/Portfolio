@@ -22,6 +22,9 @@ export function useLenis() {
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 2,
+      // Don't let Lenis hijack scroll interactions on specific elements
+      // (e.g. the Tech Stack horizontal scroller).
+      prevent: (node) => Boolean(node?.closest?.('[data-lenis-prevent]')),
     });
 
     lenisRef.current = lenis;
