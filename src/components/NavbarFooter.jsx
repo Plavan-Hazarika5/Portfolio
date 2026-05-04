@@ -24,6 +24,7 @@ const SOCIAL_LINKS = [
 export function Navbar() {
   const navRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (navRef.current) {
@@ -40,27 +41,36 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [menuOpen]);
+
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-4 transition-all duration-500 ${
-        scrolled
-          ? 'bg-surface/70 backdrop-blur-glass border-b border-glass-border shadow-glass'
+      className={`fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 md:px-12 py-3 sm:py-4 pt-[max(0.75rem,env(safe-area-inset-top,0px))] transition-all duration-500 ${
+        scrolled || menuOpen
+          ? 'bg-surface/70 backdrop-blur-[12px] md:backdrop-blur-glass border-b border-glass-border shadow-glass'
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto flex items-center justify-between">
-        
+      <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
         {/* Logo */}
         <a
           href="#"
-          className="font-display text-2xl text-white tracking-widest hover:text-accent-cyan transition-colors duration-300"
+          className="font-display text-xl sm:text-2xl text-white tracking-widest hover:text-accent-cyan transition-colors duration-300 shrink-0 min-h-[44px] min-w-[44px] flex items-center"
           data-cursor="HOME"
+          onClick={() => setMenuOpen(false)}
         >
           PLAVAN<span className="text-accent-cyan">.</span>DEV
         </a>
 
-        {/* Nav Links */}
+        {/* Nav Links — desktop */}
         <div className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map(({ label, href }) => (
             <a
@@ -74,9 +84,9 @@ export function Navbar() {
           ))}
         </div>
 
-        {/* Status + Socials */}
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
+        {/* Status + Socials + mobile toggle */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {SOCIAL_LINKS.map((s) => (
               <a
                 key={s.label}
@@ -84,17 +94,71 @@ export function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-glass-border text-white/40 hover:text-white hover:border-accent-cyan/60 hover:bg-white/5 transition-all duration-300"
+                className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full border border-glass-border text-white/40 hover:text-white hover:border-accent-cyan/60 hover:bg-white/5 transition-all duration-300"
               >
-                <s.icon className="w-3.5 h-3.5" aria-hidden="true" />
+                <s.icon className="w-4 h-4 sm:w-3.5 sm:h-3.5" aria-hidden="true" />
                 <span className="sr-only">{s.label}</span>
               </a>
             ))}
           </div>
-          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_8px_rgba(74,222,128,0.8)]" />
-          <span className="font-mono text-xs text-white/40 hidden md:block">
+          <span
+            className="w-2 h-2 shrink-0 rounded-full bg-green-400 animate-pulse shadow-[0_0_8px_rgba(74,222,128,0.8)]"
+            aria-hidden="true"
+          />
+          <span className="font-mono text-xs text-white/40 hidden lg:block">
             Open to remote projects
           </span>
+
+          <button
+            type="button"
+            className="md:hidden inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-glass-border text-white/80 hover:bg-white/5 hover:border-white/30 transition-colors"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            <span className="relative block h-3.5 w-5">
+              <span
+                className={`absolute left-0 right-0 top-0 h-0.5 rounded-full bg-current transition-transform duration-200 ${
+                  menuOpen ? 'translate-y-1.5 rotate-45' : ''
+                }`}
+              />
+              <span
+                className={`absolute left-0 right-0 top-1.5 h-0.5 rounded-full bg-current transition-opacity duration-200 ${
+                  menuOpen ? 'opacity-0' : 'opacity-100'
+                }`}
+              />
+              <span
+                className={`absolute left-0 right-0 top-3 h-0.5 rounded-full bg-current transition-transform duration-200 ${
+                  menuOpen ? '-translate-y-1.5 -rotate-45' : ''
+                }`}
+              />
+            </span>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu panel */}
+      <div
+        id="mobile-nav"
+        aria-hidden={!menuOpen}
+        className={`md:hidden overflow-hidden border-glass-border transition-[max-height,opacity] duration-300 ease-expo-out ${
+          menuOpen
+            ? 'max-h-56 border-t opacity-100 pointer-events-auto'
+            : 'max-h-0 opacity-0 border-t border-transparent pointer-events-none'
+        }`}
+      >
+        <div className="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-1">
+          {NAV_LINKS.map(({ label, href }) => (
+            <a
+              key={label}
+              href={href}
+              className="font-mono text-sm uppercase tracking-[0.2em] text-white/70 hover:text-white py-3 px-2 rounded-lg hover:bg-white/5 transition-colors"
+              onClick={() => setMenuOpen(false)}
+            >
+              {label}
+            </a>
+          ))}
         </div>
       </div>
     </nav>
@@ -105,7 +169,7 @@ export function Footer() {
   return (
     <footer
       id="contact"
-      className="relative py-32 px-6 bg-void border-t border-glass-border overflow-hidden"
+      className="relative py-20 sm:py-32 px-4 sm:px-6 pb-[max(2.5rem,env(safe-area-inset-bottom,0px)+1.5rem)] sm:pb-32 bg-void border-t border-glass-border overflow-hidden"
     >
       {/* Background glow */}
       <div
@@ -119,7 +183,7 @@ export function Footer() {
       <div className="max-w-6xl mx-auto">
         
         {/* CTA */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-12 sm:mb-20">
           <span className="font-mono text-xs text-accent-cyan uppercase tracking-[0.3em] mb-4 block">
             Let's Build Together
           </span>
@@ -131,10 +195,10 @@ export function Footer() {
           <a
             href="mailto:plavanhazarika5@gmail.com"
             data-cursor="EMAIL"
-            className="group inline-block font-body text-xl md:text-2xl text-white/40 hover:text-white transition-colors duration-500"
+            className="group inline-flex min-h-[48px] max-w-full flex-col items-center justify-center break-words text-center font-body text-base sm:text-xl md:text-2xl text-white/40 hover:text-white transition-colors duration-500 px-3 py-2 touch-manipulation"
           >
-            plavanhazarika5@gmail.com
-            <span className="block h-px bg-gradient-to-r from-transparent via-accent-cyan to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+            <span className="break-all sm:break-words">plavanhazarika5@gmail.com</span>
+            <span className="mt-1 block h-px w-full max-w-md bg-gradient-to-r from-transparent via-accent-cyan to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
           </a>
         </div>
 
@@ -153,7 +217,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-glass-border text-white/40 hover:text-white hover:border-accent-cyan/60 hover:bg-white/5 transition-all duration-300"
+                className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full border border-glass-border text-white/40 hover:text-white hover:border-accent-cyan/60 hover:bg-white/5 transition-all duration-300 touch-manipulation"
               >
                 <s.icon className="w-4 h-4" aria-hidden="true" />
                 <span className="sr-only">{s.label}</span>

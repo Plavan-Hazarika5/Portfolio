@@ -28,13 +28,7 @@ export function useGsapHorizontalScroll(bgColors = ['#040407', '#0d0220', '#020d
 
     const mm = gsap.matchMedia();
 
-    mm.add('(min-width: 768px)', () => {
-      // IMPORTANT UX CHOICE:
-      // We intentionally avoid pinning this section on desktop because it can
-      // feel like the page is "stuck" at Tech Stack. Desktop users can still
-      // explore the cards via horizontal scroll on the track itself.
-
-      // Stagger cards in slightly on first reveal
+    const revealCards = () =>
       gsap.fromTo(
         cards,
         { opacity: 0, y: 30 },
@@ -50,6 +44,17 @@ export function useGsapHorizontalScroll(bgColors = ['#040407', '#0d0220', '#020d
           },
         }
       );
+
+    mm.add('(min-width: 768px)', () => {
+      // IMPORTANT UX CHOICE:
+      // We intentionally avoid pinning this section on desktop because it can
+      // feel like the page is "stuck" at Tech Stack. Desktop users can still
+      // explore the cards via horizontal scroll on the track itself.
+      revealCards();
+    });
+
+    mm.add('(max-width: 767px)', () => {
+      revealCards();
     });
 
     return () => mm.revert();

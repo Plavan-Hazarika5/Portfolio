@@ -20,6 +20,15 @@ export function useGsapSplitText({ type = 'chars', delay = 0, stagger = 0.04 } =
     const originalText = el.textContent;
     const words = originalText.split(' ');
 
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) {
+      return;
+    }
+
+    const mobile = window.matchMedia('(max-width: 767px)').matches;
+    const animDuration = mobile ? 0.62 : 1;
+    const animStagger = mobile ? Math.min(stagger * 0.65, type === 'chars' ? 0.018 : 0.045) : stagger;
+
     // Build inner spans — each word wrapped, each char wrapped inside
     el.innerHTML = words
       .map((word) => {
@@ -49,8 +58,8 @@ export function useGsapSplitText({ type = 'chars', delay = 0, stagger = 0.04 } =
       yPercent: 0,
       opacity: 1,
       skewY: 0,
-      duration: 1,
-      stagger,
+      duration: animDuration,
+      stagger: animStagger,
       ease: 'expo.out',
     });
 

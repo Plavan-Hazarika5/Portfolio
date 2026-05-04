@@ -94,7 +94,7 @@ const BG_COLORS = ['#040407', '#06040f', '#020d14', '#050a04'];
 function TechCard({ tech }) {
   return (
     <div
-      className="tech-card flex-shrink-0 w-40 sm:w-44 md:w-64 rounded-2xl border border-glass-border bg-glass backdrop-blur-glass p-4 md:p-6 relative overflow-hidden group"
+      className="tech-card w-[calc(50%-0.375rem)] min-w-0 flex-shrink-0 sm:w-44 md:w-64 rounded-2xl border border-glass-border bg-glass backdrop-blur-[10px] md:backdrop-blur-glass p-4 md:p-6 relative overflow-hidden group"
       style={{ height: '220px' }}
     >
       {/* Hover glow */}
@@ -198,31 +198,33 @@ export default function TechStack() {
       ref={sectionRef}
       id="stack"
       className="relative overflow-hidden md:overflow-hidden transition-colors duration-100"
-      style={{ minHeight: '100vh', backgroundColor: BG_COLORS[0] }}
+      style={{ minHeight: '100dvh', backgroundColor: BG_COLORS[0] }}
     >
       {/* Grid overlay */}
       <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-20 pointer-events-none" />
 
       {/* Pinned inner */}
-      <div className="relative md:sticky md:top-0 min-h-screen md:h-screen flex flex-col justify-center overflow-hidden">
+      <div className="relative md:sticky md:top-0 min-h-[100dvh] md:h-screen flex flex-col justify-center overflow-hidden py-10 md:py-0">
 
         {/* Section label */}
-        <div className="px-6 md:px-16 mb-8 md:mb-10 flex items-end justify-between flex-shrink-0">
+        <div className="px-4 sm:px-6 md:px-16 mb-6 md:mb-10 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between flex-shrink-0">
           <div>
             <span className="font-mono text-xs text-accent-cyan uppercase tracking-[0.3em] mb-3 block">
               Tools of Trade
             </span>
-            <h2 className="font-heading text-5xl md:text-6xl text-white">Tech Stack</h2>
+            <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl text-white">Tech Stack</h2>
           </div>
-          <span className="font-mono text-xs text-white/30 hidden md:block">
-            ← Scroll to explore →
+          <span className="font-mono text-[10px] sm:text-xs text-white/30 md:text-right">
+            <span className="md:hidden">Swipe horizontally to explore</span>
+            <span className="hidden md:inline">← Scroll to explore →</span>
           </span>
         </div>
 
         {/* Horizontal scroll track */}
         <div
           ref={scrollerRef}
-          className="overflow-x-auto overflow-y-hidden px-4 md:px-0 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-auto md:touch-pan-x"
+          data-lenis-prevent
+          className="touch-scroll-momentum overflow-x-auto overflow-y-hidden px-4 md:px-0 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-pan-x"
         >
           <div
             ref={trackRef}
