@@ -157,13 +157,19 @@ export default function TechStack() {
   // - Once the carousel hits its start/end, the wheel scroll falls through
   //   and continues the page scroll (no "stuck" feeling).
   // - Shift+wheel or trackpad horizontal gestures behave naturally.
+  // Map vertical wheel → horizontal scroll only for mouse / trackpad.
+  // iOS Safari (and many mobile browsers) emit wheel events for touch pans; if we
+  // preventDefault and translate deltaY into scrollLeft while the row can still
+  // move horizontally, vertical page scroll never runs — the page feels stuck.
   useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
 
+    const finePointerMq = window.matchMedia('(pointer: fine)');
+
     const onWheel = (e) => {
-      // If the cursor is over the carousel, don't let Lenis/page scroll
-      // also react to the same wheel event.
+      if (!finePointerMq.matches) return;
+
       const stopPageScroll = () => {
         e.preventDefault();
         e.stopPropagation();
@@ -174,12 +180,10 @@ export default function TechStack() {
       const useHorizontalDelta = isShift || Math.abs(e.deltaX) > Math.abs(e.deltaY);
       const delta = useHorizontalDelta ? e.deltaX : e.deltaY;
 
-      // Convert wheel into horizontal scroll for the carousel.
       const prevLeft = el.scrollLeft;
       const nextLeft = prevLeft + delta;
       const maxLeft = el.scrollWidth - el.clientWidth;
 
-      // If we can scroll the carousel further in the wheel direction, consume it.
       const canScroll =
         (delta > 0 && prevLeft < maxLeft) || (delta < 0 && prevLeft > 0);
 
@@ -189,8 +193,19 @@ export default function TechStack() {
       }
     };
 
-    el.addEventListener('wheel', onWheel, { passive: false });
-    return () => el.removeEventListener('wheel', onWheel);
+    const sync = () => {
+      el.removeEventListener('wheel', onWheel);
+      if (finePointerMq.matches) {
+        el.addEventListener('wheel', onWheel, { passive: false });
+      }
+    };
+
+    sync();
+    finePointerMq.addEventListener('change', sync);
+    return () => {
+      finePointerMq.removeEventListener('change', sync);
+      el.removeEventListener('wheel', onWheel);
+    };
   }, []);
 
   return (
