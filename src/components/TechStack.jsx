@@ -224,7 +224,7 @@ export default function TechStack() {
         <div
           ref={scrollerRef}
           data-lenis-prevent
-          className="touch-scroll-momentum overflow-x-auto overflow-y-hidden px-4 md:px-0 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-pan-x"
+          className="touch-scroll-momentum overflow-x-auto overflow-y-hidden px-4 md:px-0 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-auto"
         >
           <div
             ref={trackRef}

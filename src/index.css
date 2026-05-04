@@ -130,7 +130,13 @@ body {
 /* ─── Mobile / touch ──────────────────────────────────── */
 .touch-scroll-momentum {
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
+}
+
+/* Avoid trapping vertical scroll chaining on phones; keep on desktop carousel */
+@media (min-width: 768px) {
+  .touch-scroll-momentum {
+    overscroll-behavior-x: contain;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
