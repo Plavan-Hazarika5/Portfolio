@@ -27,7 +27,8 @@ const PROJECTS = [
     span: 'md:col-span-1',
     year: '2025',
     stack: ['Next.js', 'PostgreSQL', 'Prisma', 'Tailwind', 'RBAC'],
-    link: '#',
+    link: 'https://service-marketplace-puce.vercel.app/',
+    repo: 'https://github.com/Plavan-Hazarika5/service-marketplace',
   },
   {
     id: 3,
