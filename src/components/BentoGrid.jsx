@@ -254,7 +254,11 @@ function ProjectModal({ project, onClose }) {
                 <a
                   href={project.link}
                   target={project.link.startsWith('http') ? '_blank' : undefined}
-                  rel={project.link.startsWith('http') ? 'noreferrer' : undefined}
+                  rel={project.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (project.link === '#') e.preventDefault();
+                  }}
                   className="inline-flex min-h-[48px] items-center justify-center gap-2 font-mono text-sm uppercase tracking-widest px-5 sm:px-6 py-3 rounded-full transition-all duration-300 w-full sm:w-auto"
                   style={{
                     color: project.color,
